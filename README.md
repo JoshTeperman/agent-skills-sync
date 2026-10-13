@@ -11,3 +11,18 @@ Clone this repo once and symlink `skills/*` (or the whole `skills/` folder) into
 ## Skills
 
 - `new-project` – create a project in your project store (Notion by default) from the current conversation.
+
+## Linking
+
+```sh
+bin/link              # link into default targets
+bin/link --dry-run    # show what would change
+bin/link ~/a ~/b      # custom targets
+SKILLS_TARGETS="~/a ~/b" bin/link
+```
+
+Default target: `~/.claude/skills`. Each skill is linked individually. Re-run after `git pull`; safe to repeat. Links to deleted skills are removed.
+
+Auto-link on pull (one-time): `git config core.hooksPath .githooks`. Re-runs `bin/link` when a pull changes `skills/`.
+
+**Local vs synced:** a real folder in a target dir is a local skill and is never touched (a warning is printed). A symlink into this repo is a synced skill.

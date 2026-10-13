@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Symlink each skills/<name>/ into each target skills dir.
+# Usage: bin/link [--dry-run] [target_dir ...]
+# Targets: args, else $SKILLS_TARGETS (space-separated), else defaults.
+set -euo pipefail
+
+REPO="$(cd "$(dirname "$0")/.." && pwd -P)"
+SRC="$REPO/skills"
+DRY=0
+if [ "${1:-}" = "--dry-run" ]; then DRY=1; shift; fi
+
+if [ $# -gt 0 ]; then TARGETS=("$@")
+elif [ -n "${SKILLS_TARGETS:-}" ]; then read -r -a TARGETS <<< "$SKILLS_TARGETS"
+else TARGETS=("$HOME/.claude/skills")
+fi
+
+run() { echo "+ $*"; [ "$DRY" = 1 ] || "$@"; }
+
+for t in "${TARGETS[@]}"; do
+  [ -d "$t" ] || run mkdir -p "$t"
+
+  # Remove dangling links into this repo.
+  for l in "$t"/*; do
+    [ -L "$l" ] || continue
+    dest="$(readlink "$l")"
+    case "$dest" in "$SRC"/*) [ -e "$l" ] || run rm "$l" ;; esac
+  done
+
+  for s in "$SRC"/*/; do
+    s="${s%/}"; name="$(basename "$s")"; dst="$t/$name"
+    if [ -L "$dst" ]; then
+      [ "$(readlink "$dst")" = "$s" ] && continue
+      case "$(readlink "$dst")" in
+        "$SRC"/*) run ln -sfn "$s" "$dst" ;;
+        *) echo "warning: $dst links elsewhere, skipping" >&2 ;;
+      esac
+    elif [ -e "$dst" ]; then
+      echo "warning: $dst is a local skill, skipping" >&2
+    else
+      run ln -s "$s" "$dst"
+    fi
+  done
+done

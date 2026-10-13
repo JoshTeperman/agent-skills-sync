@@ -21,6 +21,6 @@ bin/link ~/a ~/b      # custom targets
 SKILLS_TARGETS="~/a ~/b" bin/link
 ```
 
-Defaults: `~/.claude/skills`, `~/.cursor/skills`, `~/.agents/skills` (Codex). Each skill is linked individually. Re-run after `git pull`; safe to repeat. Links to deleted skills are removed.
+Default target: `~/.claude/skills`. Each skill is linked individually. Re-run after `git pull`; safe to repeat. Links to deleted skills are removed.
 
 **Local vs synced:** a real folder in a target dir is a local skill and is never touched (a warning is printed). A symlink into this repo is a synced skill.

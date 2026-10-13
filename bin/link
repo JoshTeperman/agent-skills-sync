@@ -11,7 +11,7 @@ if [ "${1:-}" = "--dry-run" ]; then DRY=1; shift; fi
 
 if [ $# -gt 0 ]; then TARGETS=("$@")
 elif [ -n "${SKILLS_TARGETS:-}" ]; then read -r -a TARGETS <<< "$SKILLS_TARGETS"
-else TARGETS=("$HOME/.claude/skills" "$HOME/.cursor/skills" "$HOME/.agents/skills")
+else TARGETS=("$HOME/.claude/skills")
 fi
 
 run() { echo "+ $*"; [ "$DRY" = 1 ] || "$@"; }

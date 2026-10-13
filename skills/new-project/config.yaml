@@ -1,6 +1,6 @@
-# Project store settings for the new-project skill.
 # provider must match a file in providers/ (e.g. notion -> providers/notion.md).
 provider: notion
-
-# Name of the top-level page/folder/database that holds all projects.
 projects_root: Projects
+
+# Obsidian only:
+# vault_path: /path/to/your/vault

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Run bin/link if the last pull/rebase touched skills/.
+root="$(git rev-parse --show-toplevel)"
+if ! git rev-parse -q --verify ORIG_HEAD >/dev/null; then exec "$root/bin/link"; fi
+if [ -n "$(git diff --name-only ORIG_HEAD HEAD -- skills/)" ]; then exec "$root/bin/link"; fi

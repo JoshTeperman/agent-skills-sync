@@ -23,4 +23,6 @@ SKILLS_TARGETS="~/a ~/b" bin/link
 
 Default target: `~/.claude/skills`. Each skill is linked individually. Re-run after `git pull`; safe to repeat. Links to deleted skills are removed.
 
+Auto-link on pull (one-time): `git config core.hooksPath .githooks`. Re-runs `bin/link` when a pull changes `skills/`.
+
 **Local vs synced:** a real folder in a target dir is a local skill and is never touched (a warning is printed). A symlink into this repo is a synced skill.

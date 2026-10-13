@@ -1,6 +1,7 @@
 # Provider: Obsidian
 
-Use file system tools. Vault: `vault_path` from `config.yaml`. If unset, ask.
+Use file system tools.
+Requires `vault_path: /path/to/vault` in `config.yaml`. If unset, ask the user for the path and add it.
 
 ## Find root
 `<vault_path>/<projects_root>/`. If missing, ask before creating.

@@ -1,6 +1,6 @@
 ---
 name: new-project
-description: Create a new project in the project store (Notion by default) from the current conversation. Use for "/new-project <instructions>", e.g. "/new-project create new project from our conversation, call it project-terrific".
+description: Create a new project in the project store from the current conversation. Use for "/new-project <instructions>", e.g. "/new-project create new project from our conversation, call it project-terrific".
 disable-model-invocation: true
 ---
 
@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 ## Setup
 1. Read `config.yaml`.
-2. Read `providers/<provider>.md`. Use it for all store operations. If missing, list available providers and stop.
+2. Read `providers/<provider>.md` for the `provider` in `config.yaml`. Use it for all store operations. If the provider or its file is missing, list the files in `providers/` and ask the user to update `config.yaml` or generate a provider file for the new store.
 
 ## Steps
 1. **Name.** Take the project name from the prompt. If missing or unclear, ask. Never derive one.
@@ -18,7 +18,7 @@ disable-model-invocation: true
    - `README.md`: what the project is and does, goals, status.
    - `decisions-log.md`: only if decisions exist. Per entry: date, decision, rationale.
    - One doc per existing plan, PRD, architecture doc, etc. from the conversation, in full.
-5. **Report** name, location/link, docs created, sub-agent result.
+5. **Report** project name, project link, sub-agent handover status (created / not supported).
 
 ## Sub-agent briefing
 - Read the whole project (README and every doc) before acting.
@@ -26,6 +26,6 @@ disable-model-invocation: true
 - Keep project docs current as the work changes.
 - Ask before going beyond the project's scope.
 
-## Rules
+## Guardrails
 - Use only conversation content. Don't invent decisions or docs.
 - Never overwrite an existing project without confirmation.

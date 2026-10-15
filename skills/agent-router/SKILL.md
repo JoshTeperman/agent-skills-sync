@@ -20,7 +20,10 @@ Read `config.yaml` in this skill folder:
 If any value is missing, ask the user.
 
 ## Item store
-SQLite at `store_path`. If missing, create it: `mkdir -p "$(dirname "$store_path")" && sqlite3 "$store_path" < schema.sql`.
+SQLite at `store_path`, accessed with python3's built-in `sqlite3` module (not the CLI).
+
+- Every connection: run `PRAGMA foreign_keys=ON`.
+- If the db is missing: create its directory, connect, and run `executescript()` on `schema.sql`.
 
 - `items`: one row per item. `id` is the source's id (e.g. email message id). `status`: received/routed/awaiting_user/done.
 - `events`: append-only history. Never update or delete rows.

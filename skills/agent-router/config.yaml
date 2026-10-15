@@ -1,4 +1,4 @@
 agent_inbox: joshteperman.agent@gmail.com
 user_identities: [joshteperman@gmail.com]
 knowledge_agent: Vault Keeper
-store_path: /workspace/agent-router/items.jsonl
+store_path: /workspace/agent-router/items.db

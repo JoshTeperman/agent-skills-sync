@@ -20,6 +20,7 @@ This skill is a fork of `no-comments` by Lauren Tan (@poteto), with the `comment
 - PATCH step 3. Upstream runs `/architect` for fixes that need a shape. Downstream fixes trivial flags and writes a note with a best-guess root-cause fix for the rest.
 - DELETE step 4, which implemented the smallest root-cause fix in scope under `principle-fix-root-causes` and `principle-redesign-from-first-principles`. Downstream leaves larger fixes as notes.
 - PATCH step 5 (now 4). "Leave keeps" becomes "Leave notes".
+- PATCH step 6 (now 5). The report drops reruns and the architect sketch, and adds root-cause notes from step 3.
 - ADD a `## Comment Sicko` section with the persona, its keep list, kill targets, and report format. Upstream keeps this in a separate agent definition.
 - PATCH the persona. Unclear `IMPORTANT` claims get the mark `unclear` instead of a `/how` or `/why` run.
 
@@ -29,8 +30,3 @@ This skill is a fork of `no-comments` by Lauren Tan (@poteto), with the `comment
 |---|---|
 | Spawn Comment Sicko | Analyse with the Comment Sicko persona |
 | keeps | notes |
-
-## Known issues
-
-- `metadata.credits.url` points to `pstack/skills/how/SKILL.md`. The upstream skill is `pstack/skills/no-comments/SKILL.md`.
-- Step 5 still reports "reruns" and "architect sketch", which no downstream step produces.

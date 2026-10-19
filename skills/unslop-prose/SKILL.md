@@ -16,7 +16,7 @@ This is a forked skill borrowing from a public repository. Use /downstream to tr
 
 Edit text to remove AI patterns. Scan for the patterns below, then rewrite. Preserve meaning and match the intended tone.
 
-This skill was sourced from @poteto's (Lauren Tan) unslop skill. However, should this version diverge from the original, DOWNSTREAM.md maintains a record of modifications/ommissions to ensure upstream updates to poteto-mode can easily be applied on request, while preserving the intentional dowstream changes. Any request to update this skill based on the original upstream skill should first refer to DOWNSTREAM.md before making changes, and update DOWNSTREAM.md afterwards.
+This skill was sourced from @poteto's (Lauren Tan) unslop skill. However, should this version diverge from the original, DOWNSTREAM.md maintains a record of modifications and omissions to ensure upstream updates to unslop can easily be applied on request, while preserving the intentional downstream changes. Any request to update this skill based on the original upstream skill should first refer to DOWNSTREAM.md before making changes, and update DOWNSTREAM.md afterwards.
 
 ## Patterns to detect and fix
 
@@ -68,5 +68,5 @@ Rule numbers are stable ids that other skills cite. A removed rule leaves a gap.
 24. **Active voice.** Prefer it. Catch "is/are/was/were + past participle" and name the actor: "queries are validated" becomes "the compiler validates queries", "the file is parsed by the loader" becomes "the loader parses the file". Passive is fine only when the actor is unknown or genuinely doesn't matter.
 25. **Cut adverbs, or use a stronger verb.** "runs quickly" becomes "is fast" or the number, and "significantly improves" becomes the measured delta. An adverb propping up a weak verb means the verb is wrong.
 26. **Prefer the plain word.** "utilize" and "leverage" become "use", "facilitate" becomes "help", "numerous" becomes "many", "in the event that" becomes "if". The fancier synonym is rarely clearer.
-27. **Mannered prose.** Metaphor or flourish where a literal phrase exists: aphorisms ("wire it or delete it"), rhetorical fragments for effect, personified code ("the plan holds it"), figurative verbs ("rides along", "stands on"), stock framing phrases. "A dial worth turning" becomes "a parameter worth varying". Say what you mean. Rule 26 covers the metaphor nouns.
+27. **Mannered prose.** Metaphor or flourish where a literal phrase exists: aphorisms ("wire it or delete it"), rhetorical fragments for effect, personified code ("the plan holds it"), figurative verbs ("rides along", "stands on"), stock framing phrases. "A dial worth turning" becomes "a parameter worth varying". Say what you mean. Rule 21 covers the metaphor nouns.
 28. **Over-compression.** Dropped articles, verbless fragments, symbol-speak, and abbreviations that make the reader decode instead of read. "Parser rejects bad date → exit 2, no write" becomes "The parser rejects a bad date, exits with code 2, and writes nothing." Write whole sentences with their articles and verbs, and spell out arrows and abbreviations.

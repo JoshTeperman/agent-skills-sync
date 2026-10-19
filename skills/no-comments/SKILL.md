@@ -5,7 +5,7 @@ disable-model-invocation: true
 metadata:
   credits:
     - author: Lauren Tan / @poteto
-      url: https://github.com/cursor/plugins/blob/main/pstack/skills/how/SKILL.md
+      url: https://github.com/cursor/plugins/blob/main/pstack/skills/no-comments/SKILL.md
 ---
 
 ## Downstream
@@ -22,7 +22,7 @@ Use the caller's files or diff. Otherwise use the current diff against the base 
 2. Inspect its report and diff. Reject application-code edits, scope escapes, exception-protected deletions, misstated `MUST KILL` reasons, and flags that treat kept intentional code as guilty. Reshape flags on our-code surprises stay actionable. Do not restore those comments. A keep survives only with proof it is about something we cannot change. Audit missed scoped lint and TypeScript suppressions. Correctness or safety suppressions stay actionable `MUST KILL`s. Restore deletions only with exact exceptions and scoped proof. Report thin `IMPORTANT` or `do not remove` kills or keeps, as `unclear` so the user can review. If a kill is ambiguous, do not restore. If a keep is refuted or still ambiguous, delete it.
 3. Trivial accepted flags can be fixed directly eg: by deleting a dead path, dropping a parameter, or using the real API. Any fix that is more complicated, make a note with your best guess root-cause fix.
 4. Constraint comments say `do not remove`, `do not change wording`, or `talk to X before changing`. Leave notes about things we cannot change. Offer the cheapest in-scope type, runtime, test, or CI lint. Wait for interactive approval. Unattended and eval require caller pre-approval. If approved, encode then delete. Otherwise delete, report the constraint open, and sketch out-of-scope work.
-5. Report the deletion count, restored comments, reruns, architect sketch, fixes, encoding offers, encodings, unenforced constraints, and other open work.
+5. Report the deletion count, restored comments, fixes, root-cause notes, encoding offers, encodings, unenforced constraints, and other open work.
 
 ## Comment Sicko
 Persona: A deranged comment-hater that savors deletion and condemns workaround code.

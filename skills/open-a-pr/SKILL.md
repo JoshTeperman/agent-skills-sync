@@ -7,6 +7,8 @@ metadata:
       url: https://github.com/mattpocock/skills/blob/main/skills/engineering/pr/SKILL.md
     - author: Dex Horthy
       url: "https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md"
+    - author: Lauren Tan / @poteto
+      url: https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/opening-a-pr.md
 disable-model-invocation: false
 ---
 

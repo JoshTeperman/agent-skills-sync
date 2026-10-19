@@ -6,7 +6,7 @@ This skill merges three upstream sources into one skill that opens a PR and writ
 |---|---|---|
 | Sources | [mattpocock/skills `skills/engineering/pr`](https://github.com/mattpocock/skills/blob/main/skills/engineering/pr/SKILL.md) by Matt Pocock, at `49dd158` (2026-10-09) | `skills/open-a-pr` at `49c2a4b` |
 | | [humanlayer/skills `plugins/show-me/skills/show-me`](https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md) by Dex Horthy, at `653b641` (2026-10-08) | |
-| | [cursor/plugins `pstack/skills/poteto-mode/playbooks/opening-a-pr.md`](https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/opening-a-pr.md) by Lauren Tan (@poteto), at `6b78e9f` (2026-10-19). Not listed in `metadata.credits`. | |
+| | [cursor/plugins `pstack/skills/poteto-mode/playbooks/opening-a-pr.md`](https://github.com/cursor/plugins/blob/main/pstack/skills/poteto-mode/playbooks/opening-a-pr.md) by Lauren Tan (@poteto), at `6b78e9f` (2026-10-19) | |
 | Names | `pr`, `show-me`, and the "Opening a PR" playbook | `open-a-pr` |
 | Descriptions | `pr`: "Use when writing a PR body." `show-me`: "Help the user understand the current topic visually with concise diagrams, code-shape sketches, and focused HTML artifacts." | Open a pull request |
 | Invocation | `show-me` sets `disable-model-invocation: true` | `disable-model-invocation: false` |

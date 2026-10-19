@@ -15,15 +15,13 @@ This skill is a fork of `poteto-mode` by Lauren Tan (@poteto). This file records
 -poteto-mode/
 +execution-time/
  ├── SKILL.md
--├── playbooks/      # 22 playbooks
+ ├── playbooks/
+-│   └── ...         # 22 playbooks
++│   └── investigate.md
 -├── references/bugbot-triage.md
 -└── scripts/        # bootstrap, check-plan, orch, watch-pr, worktree-audit
 +└── DOWNSTREAM.md
-+playbooks/
-+└── investigate.md
 ```
-
-The downstream playbook lives at `skills/playbooks/investigate.md`, outside the skill directory. The skill tells the agent to open playbooks at `playbooks/<title>.md` relative to the skill, so that path does not resolve.
 
 ## Changes
 
@@ -37,6 +35,7 @@ The downstream playbook lives at `skills/playbooks/investigate.md`, outside the 
 - ADD four downstream playbooks: Investigate, Grill with docs, Create spec, and Implement. Only Investigate has a file. Grill with docs and Create spec have no description.
 - PATCH the upstream playbook list. Mark all upstream playbooks DISABLED until they merge into the local skills.
 - DELETE the figure-it-out and Orchestrate routing paragraph from Playbooks.
+- PATCH Writing the reply. The colon rule cites `unslop-prose` rule 10, which is upstream `unslop` rule 14.
 - PATCH Pause safely. "a Cursor restart" becomes "a Cursor/Claude restart".
 
 ## Omissions
@@ -52,8 +51,4 @@ The downstream playbook lives at `skills/playbooks/investigate.md`, outside the 
 |---|---|
 | `poteto-mode` | `execution-time` |
 | Investigation playbook | Investigate playbook |
-
-## Known issues
-
-- Writing the reply cites "unslop rule 14" for colon overuse. In `unslop-prose`, that rule is 10.
-- Writing the reply and the Investigate playbook name the `unslop` skill. Downstream, that skill is `unslop-prose`.
+| `unslop` | `unslop-prose` |

@@ -32,3 +32,10 @@ Other skills cite rules by number. Use this map to translate an upstream citatio
 | 23 to 25 | 18 to 20 | Filler rules |
 | 26 | 21 | Abstract metaphor nouns |
 | 27 to 33 | 22 to 28 | Plain speech rules |
+
+## Change log
+
+### 2026-10-19 · #4
+
+- PATCH `SKILL.md`. Rule 27 cites rule 21 for metaphor nouns, to match the downstream numbering.
+- PATCH `SKILL.md`. The intro paragraph names `unslop` as the upstream skill, and fixes the typos "ommissions" and "dowstream".

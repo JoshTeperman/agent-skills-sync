@@ -18,11 +18,11 @@ The referenced `DOWNSTREAM_SKILL` credits another author's skill, found at UPSTR
 - Changes, Omissions
 - Major renames or vocabulary differences
 - File structures
-4. Review changes on current branch for all files in directory at `DOWNSTREAM_PATH`, and read `DOWNSTREAM_PATH/DOWNSTREAM.md` to get up to date with historical changes. For any new changes, Add an entry to changes log, ordered by latest entry, descending. Apply /unslop-prose to each entry change summary. Each entry should include:
+4. Review changes on current branch for all files in directory at `DOWNSTREAM_PATH`, and read `DOWNSTREAM_PATH/DOWNSTREAM.md` to get up to date with historical changes. Each entry cites its PR, so get the PR number first. Use the branch's open PR (`gh pr view --json number`), or open one with /open-a-pr. For any new changes, add an entry to the change log, ordered by latest entry, descending, and push it to the PR. Apply /unslop-prose to each entry change summary. Each entry should include:
 - Date
-- Commit hash
+- PR number, as `#<number>`. Find the merged change with `gh pr view <number>` or `git log --grep '#<number>'`.
 - Change summary, pick from one of (`ADD`, `DELETE`, `PATCH`, `RENAME`) verbs, and describe the change. Use relative file paths.
-5. Create a PR with /open-a-pr
+5. Create a PR with /open-a-pr, unless step 4 already opened one
 
 ## Metadata credits
 Credits is available in calling skills metadata, and is a list of credits<author, url>.

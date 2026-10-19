@@ -30,3 +30,10 @@ This skill is a fork of `no-comments` by Lauren Tan (@poteto), with the `comment
 |---|---|
 | Spawn Comment Sicko | Analyse with the Comment Sicko persona |
 | keeps | notes |
+
+## Change log
+
+### 2026-10-19 · #4
+
+- PATCH `SKILL.md`. Point `metadata.credits.url` to upstream `no-comments` instead of `how`.
+- PATCH `SKILL.md`. Step 5 reports root-cause notes instead of reruns and an architect sketch.

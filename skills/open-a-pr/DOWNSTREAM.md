@@ -71,3 +71,9 @@ This skill merges three upstream sources into one skill that opens a PR and writ
 | `/unslop` | `/unslop-prose` |
 | Summary | Visual Aids, used inside What changed |
 | Merge Danger | Blast Radius |
+
+## Change log
+
+### 2026-10-19 · #4
+
+- PATCH `SKILL.md`. Add Lauren Tan's `opening-a-pr.md` playbook to `metadata.credits`.

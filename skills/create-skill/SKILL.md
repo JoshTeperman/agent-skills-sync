@@ -1,6 +1,6 @@
 ---
 name: create-skill
-description: Draft PR to add new agent skill to local (current project) or global shared skills repository.
+description: Create a PR to add new agent skill to local (current project) or global shared skills repository.
 disable-model-invocation: true
 ---
 
@@ -33,8 +33,16 @@ Apply the **unslop** skill to every line.
 
 Show the draft to the user and take feedback. Expect multiple iterations. Cut ruthlessly. A skill is not a manual.
 
-### 2. Finalise
-Work in a worktree off main. Commit and open a PR. Don't push to main directly.
+### 2. Validate the skill
+- frontmatter has `name` and `description`
+- referenced files exist
+- cross-skill links resolve
 
-### 3. Wrap up
+### 4. Verify the skill's behaviour
+Add Test cases if structural. Skip if subjective.
+
+### 3. Finalise
+Run **Opening a PR**.
+
+### 4. Wrap up
 Always return to the original project working directory.

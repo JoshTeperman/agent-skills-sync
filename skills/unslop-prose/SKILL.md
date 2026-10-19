@@ -1,12 +1,22 @@
 ---
-name: unslop
-description: Cut AI tells from any writing. Sourced from pstack by @poteto (Lauren Tan)
+name: unslop-prose
+description: Cut AI tells from any writing.
 disable-model-invocation: true
+metadata:
+  credits:
+    - author: Lauren Tan, @poteto
+      url: https://github.com/cursor/plugins/blob/main/pstack/skills/unslop/SKILL.md
 ---
 
-# Unslop
+## Downstream
+
+This is a forked skill borrowing from a public repository. Use /downstream to track forked changes.
+
+# Unslop Prose
 
 Edit text to remove AI patterns. Scan for the patterns below, then rewrite. Preserve meaning and match the intended tone.
+
+This skill was sourced from @poteto's (Lauren Tan) unslop skill. However, should this version diverge from the original, DOWNSTREAM.md maintains a record of modifications/ommissions to ensure upstream updates to poteto-mode can easily be applied on request, while preserving the intentional dowstream changes. Any request to update this skill based on the original upstream skill should first refer to DOWNSTREAM.md before making changes, and update DOWNSTREAM.md afterwards.
 
 ## Patterns to detect and fix
 

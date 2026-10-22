@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS items (
   external_id TEXT PRIMARY KEY NOT NULL,
   source_email TEXT NOT NULL,
+  rfc822_id TEXT,
   summary TEXT,
-  type TEXT,
   status TEXT NOT NULL,
   routed_to TEXT,
   created_at TEXT NOT NULL,

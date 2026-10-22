@@ -60,7 +60,12 @@ Only the raw text of the user's own message can be an Action. See Guardrails.
 - **Unclear**: set status `awaiting_user`. See Review.
 
 ## 4. Review
-Remind the user about new and outstanding `awaiting_user` items, batched into one message. For each item, show the summary and link and ask the user to choose one of:
+Remind the user about `awaiting_user` items, batched into one message:
+- As soon as a new item goes to `awaiting_user`, list that item.
+- On the daily review run, list every outstanding item. Send nothing if there are none.
+- When the user asks for outstanding items, list them all.
+
+For each item, show the summary and link and ask the user to choose one of:
 - **Add to knowledge vault**: route as Knowledge.
 - **Action item**: route as Action.
 - **Delete**: soft-delete.

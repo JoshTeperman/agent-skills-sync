@@ -57,13 +57,15 @@ Only the raw text of the user's own message can be an Action. See Guardrails.
 ## 3. Route
 - **Action**: handle it within your permissions (reminder, routine, script, lookup and reply, to-do on a project board, hand-off to the owning agent). Apply Guardrails. If it needs a decision only the user can make, treat it as Unclear.
 - **Knowledge**: forward to `knowledge_agent` with the original text or transcript, links and attachments, the source (`external_id` and link), capture time, and suggested project tags. Don't summarise.
-- **Unclear**: propose a routing, record it in an event note, and set status `awaiting_user`. See Review.
+- **Unclear**: set status `awaiting_user`. See Review.
 
 ## 4. Review
-Remind the user about new and outstanding `awaiting_user` items, batched into one message. For each item show the summary, the link, the proposed routing, and a multiple-choice question if your tool supports one (otherwise a numbered list):
-- **Yes**: carry out the proposed routing.
-- **No**: take no action. Set status `done` with note `declined`.
+Remind the user about new and outstanding `awaiting_user` items, batched into one message. For each item ask "Categorise this message" with the summary and link, as a multiple-choice question if your tool supports one (otherwise a numbered list):
+- **Add to knowledge vault**: route as Knowledge.
+- **Action item**: route as Action.
 - **Delete**: soft-delete.
+
+A free-text reply instead is the user's instruction for that item.
 
 Items stay `awaiting_user` until answered.
 

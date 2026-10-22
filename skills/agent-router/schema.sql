@@ -1,8 +1,6 @@
 CREATE TABLE IF NOT EXISTS items (
-  id TEXT PRIMARY KEY,
-  source TEXT NOT NULL,
-  discussion_user TEXT NOT NULL,
-  external_id TEXT,
+  external_id TEXT PRIMARY KEY NOT NULL,
+  source_email TEXT NOT NULL,
   summary TEXT,
   type TEXT,
   status TEXT NOT NULL,
@@ -11,11 +9,11 @@ CREATE TABLE IF NOT EXISTS items (
   updated_at TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS idx_items_status ON items(status);
-CREATE INDEX IF NOT EXISTS idx_items_discussion_user ON items(discussion_user);
+CREATE INDEX IF NOT EXISTS idx_items_source_email ON items(source_email);
 
 CREATE TABLE IF NOT EXISTS events (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  item_id TEXT NOT NULL REFERENCES items(id),
+  item_id TEXT NOT NULL REFERENCES items(external_id),
   timestamp TEXT NOT NULL,
   event TEXT NOT NULL,
   note TEXT

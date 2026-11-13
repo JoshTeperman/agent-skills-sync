@@ -9,13 +9,7 @@ disable-model-invocation: true
 
 # Create project spec
 
-Create and fill `scoping` under `<projects_root>/<project-name>/` in the project store.
-
-`new-project` is a separate workflow; projects don't run both. Do not create `README.md` here. This skill creates or fills `scoping`. When scoping is ready, `scoping-to-repo` promotes it into the GitHub repo as the source of truth.
-
-## Setup
-1. Read `config.yaml`.
-2. Read `providers/<provider>.md` for the `provider` in `config.yaml`. Use it for all store operations. If the provider or its file is missing, list the files in `providers/` and ask the user to update `config.yaml` or generate a provider file for the new store.
+Create and fill `scoping` under `Projects/<project-name>/` in Notion. Use the Notion MCP tools (`notion-search`, `notion-fetch`, `notion-create-pages`, `notion-duplicate-page`, `notion-move-pages`, `notion-update-page`). Plain nested pages only, no databases.
 
 ## Steps
 
@@ -23,14 +17,22 @@ Create and fill `scoping` under `<projects_root>/<project-name>/` in the project
 Take the project name from the prompt. If missing or unclear, ask. Never derive one.
 
 ### 2. Find or create the project
-List projects under `projects_root`. Skip the scoping template and other non-project pages the provider names.
+Search for a page titled `Projects`. Several matches: prefer the Projects root by path; if still ambiguous, ask which one. None: ask whether to create it and under which parent. Create it only after they confirm.
 
-- No match: create `<project-name>` under the root. Do not invent a `README.md` or other docs.
+Fetch the root. Direct child pages are candidates. Skip `scoping-template` and pages that are clearly not projects (for example a Planning docs grouping or an Archived toggle). Fetch a candidate if the name might be a duplicate.
+
+- No match: create `<project-name>` under the root (empty body). Do not invent a `README.md` or other docs. Return the project page URL.
 - Exact or similar match: confirm with a multiple-choice question, including Cancel. Never overwrite an existing project without confirmation.
 - If `scoping` already exists: ask whether to fill the existing page, leave it, or cancel. Never overwrite it without confirmation.
 
 ### 3. Create `scoping` if needed
-If it does not exist, clone the configured scoping template as `<projects_root>/<project-name>/scoping`. Keep every heading. Do not edit the template itself.
+If it does not exist, clone `scoping-template` as `Projects/<project-name>/scoping`. Keep every heading. Do not edit the template itself.
+
+1. Search for a page titled `scoping-template`. Prefer a child of the Projects root if several match; ask if still ambiguous.
+2. `notion-duplicate-page` on that page. Duplication is async and lands next to the template, not under the project. Do not treat the returned URL as ready until a fetch shows the template headings.
+3. `notion-move-pages` the duplicate under the project page.
+4. `notion-update-page` `update_properties` to set the title to `scoping`.
+5. Never edit the template page itself.
 
 ### 4. Interview and fill
 Use the **grilling** skill: design tree in rounds, whole frontier each round, recommended answers, wait for the user's replies.
@@ -39,7 +41,7 @@ Start the tree at **Section 0** and **Section 1** only. Do not interview Section
 
 Always fill **Sections 9–11** once 0 and 1 are settled (and 2–8 are filled or marked N/A). Section 10 lists only milestones that apply, plus a spike/MVP row when exploration is still needed.
 
-Write settled rounds back to the `scoping` page as you go. Apply the **unslop** skill. Use "the user" or "the human" in imperatives, not the author's first name.
+Write settled rounds back to the `scoping` page as you go (`notion-update-page` `update_content`, smallest exact `old_str`). Keep every heading. For unused Sections 2–8, replace the section body (not the heading) with `N/A — <reason>`. Preserve child pages. Apply the **unslop** skill. Use "the user" or "the human" in imperatives, not the author's first name.
 
 ### 5. Decisions, estimates, size
 - Number scoping decisions `S-D#` and record them in full in Section 11 (Decision Log & Index). Append only; mark superseded rows, do not delete them.
@@ -70,4 +72,3 @@ Keep these headings, in this order, matching the scoping template:
 - Use only what the user said or what is already in the store. Don't invent requirements, decisions, metrics or deadlines.
 - Never overwrite an existing project or `scoping` page without confirmation.
 - Never edit or overwrite the scoping template.
-- Don't run `scoping-to-repo` from this skill.

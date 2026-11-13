@@ -2,7 +2,6 @@
 
 Use file system tools.
 Requires `vault_path: /path/to/vault` in `config.yaml`. If unset, ask the user for the path and add it.
-`projects_root_id` and `scoping_template_id` are Notion-only; ignore them.
 
 Optional: `scoping_template_path` in `config.yaml`, an existing markdown file to copy.
 

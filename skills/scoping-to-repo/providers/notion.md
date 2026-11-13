@@ -10,10 +10,10 @@ Projects/
     <supporting docs>
 ```
 
-`projects_root` is the page title. `projects_root_id` is in `config.yaml`. Prefer the ID when set.
+`projects_root` is the page title in `config.yaml`. Resolve it with `notion-search` by title or path. If several matches, prefer a page under the Projects root. If still ambiguous, ask.
 
 ## Find project and scoping
-1. If `projects_root_id` is set, fetch that page; otherwise search for `projects_root`.
+1. Search for a page titled `projects_root`.
 2. Find the child page named `<project_name>`, then its child titled `scoping`.
 3. Fetch `scoping` in full. If the body is already a stub pointing at `docs/scoping.md`, stop.
 

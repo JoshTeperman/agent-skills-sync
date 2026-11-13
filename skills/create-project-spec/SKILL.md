@@ -11,7 +11,7 @@ disable-model-invocation: true
 
 Create and fill `scoping` under `<projects_root>/<project-name>/` in the project store.
 
-`new-project` creates the project folder and `README.md`. This skill creates or fills `scoping`. When scoping is ready, `scoping-to-repo` promotes it into the GitHub repo as the source of truth.
+`new-project` is a separate workflow; projects don't run both. Do not create `README.md` here. This skill creates or fills `scoping`. When scoping is ready, `scoping-to-repo` promotes it into the GitHub repo as the source of truth.
 
 ## Setup
 1. Read `config.yaml`.
@@ -25,7 +25,7 @@ Take the project name from the prompt. If missing or unclear, ask. Never derive 
 ### 2. Find or create the project
 List projects under `projects_root`. Skip the scoping template and other non-project pages the provider names.
 
-- No match: create `<project-name>` under the root. Do not invent a `README.md` or other docs; that is `new-project`.
+- No match: create `<project-name>` under the root. Do not invent a `README.md` or other docs.
 - Exact or similar match: confirm with a multiple-choice question, including Cancel. Never overwrite an existing project without confirmation.
 - If `scoping` already exists: ask whether to fill the existing page, leave it, or cancel. Never overwrite it without confirmation.
 

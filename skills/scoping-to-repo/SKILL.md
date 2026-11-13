@@ -11,7 +11,7 @@ disable-model-invocation: true
 
 Promote a ready `scoping` page from the project store into the project's GitHub repo. After this, `docs/scoping.md` is the source of truth.
 
-`new-project` creates the project folder and `README.md`. `create-project-spec` creates and fills `scoping`. This skill runs only once that page is ready.
+`create-project-spec` creates and fills `scoping`. This skill runs once that page is ready, and converts the store `scoping` page to a stub that links to the repo copy.
 
 ## Setup
 1. Read `config.yaml`.
@@ -26,7 +26,7 @@ Fetch `<projects_root>/<project-name>/scoping`. If it is already a stub that poi
 
 Confirm the doc is ready: planned spikes or MVPs are done (findings written back) or the user says to promote anyway. If it is not ready, stop.
 
-Identify the local GitHub repo from the prompt, the appendix, or by asking. The repo must already exist as a local checkout. Do not create a remote repository, commit, or push unless the user asks.
+Identify the GitHub repo from the prompt, the appendix, or by asking. Inspect whatever already exists (a mid-scope spike may have created the repo ad-hoc) and work with that state. If there is no repo yet, create it only after the user confirms, then clone or init locally. Don't commit or push the scoping files unless the user asks.
 
 If `docs/scoping.md` or `CLAUDE.md` already exists, confirm before overwriting.
 
@@ -52,6 +52,8 @@ For each applicable Section 10 milestone except the scoping/design row itself, c
 - `proposal.md` — why, what changes, out of scope, a Decisions section (number them `D1`, `D2`, …; the index cites them as `<###>-D#`, for example `004-D2`), and how we know it worked. Leave decisions and evidence blank unless they are already in scoping.
 - `tasks.md` — ordered steps and done-criteria, from the milestone when present.
 - Do not create `results.md` yet. It is written when the change completes (measurements, and screenshots or GIFs when the change touches a frontend).
+
+If a later milestone is still unclear because of an upstream dependency, still scaffold the folder and note that exception explicitly in `proposal.md` / `tasks.md`. Don't invent the missing details.
 
 Use zero-padded folder names (`001-mvp`). If Section 10 already numbers milestones, keep those numbers and slug the name. Confirm with the user if the mapping is unclear.
 

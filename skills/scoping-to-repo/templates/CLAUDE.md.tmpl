@@ -1,0 +1,26 @@
+# {{project_name}}
+
+{{one_line_summary}} See `docs/scoping.md` for the problem, constraints, and success metrics. Read it before proposing anything.
+
+## How we work
+
+Specs live in files, not in chat. Chat is gone next session; files aren't.
+
+- `docs/scoping.md` — project-level why and what. The source of constraints.
+- `docs/specs/` — how the system behaves today. One file per capability.
+- `docs/changes/` — one numbered folder per proposed change, containing `proposal.md` (why, and what changes) and `tasks.md` (the steps). Larger changes also get `design.md` (how).
+- `docs/changes/archive/` — completed changes.
+
+## Rules
+
+1. No implementation code without an approved proposal in `docs/changes/`. If asked for code outside an approved change, write the proposal first and ask.
+2. Work the task list in order. Stop at the end of a change with `results.md`, or at a stop condition, not after each task.
+3. When a change is complete:
+   - Update `docs/specs/` to match what is now true.
+   - Update `docs/scoping.md` (requirement ticks, milestone status, decision index).
+   - Write `results.md` (measurements, and screenshots or GIFs when the change touches a frontend).
+   - Move the change folder to `docs/changes/archive/`.
+4. Specs describe behaviour. Proposals record decisions. Don't mix them.
+5. Work on a branch, never on `main`. A change lands as a pull request. One branch per change, opened with `gh pr create`.
+6. Working docs and artifacts stay out of any published package or build.
+7. At the end of the project, write or update `README.md` so it reflects how the system actually works, drawn from `docs/specs/`, key decisions, findings and evidence, and trade-offs.

@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
-# Symlink each skills/<name>/ into each target skills dir.
 # Usage: bin/link [--dry-run] [target_dir ...]
-# Targets: args, else $SKILLS_TARGETS (space-separated), else defaults.
+# Links every folder under skills/ that has a SKILL.md, at any depth, into each target as <target>/<folder-name>.
+# Targets: args, else $SKILLS_TARGETS (space-separated), else ~/.claude/skills.
+# Links every executable file directly inside capabilities/<name>/ into $CAPABILITIES_BIN (default ~/.local/bin).
+# The command name is the file name without its extension, with "_" replaced by "-".
 set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")/.." && pwd -P)"
-SRC="$REPO/skills"
 DRY=0
 if [ "${1:-}" = "--dry-run" ]; then DRY=1; shift; fi
 
@@ -13,31 +14,77 @@ if [ $# -gt 0 ]; then TARGETS=("$@")
 elif [ -n "${SKILLS_TARGETS:-}" ]; then read -r -a TARGETS <<< "$SKILLS_TARGETS"
 else TARGETS=("$HOME/.claude/skills")
 fi
+BIN="${CAPABILITIES_BIN:-$HOME/.local/bin}"
+TAB="$(printf '\t')"
 
 run() { echo "+ $*"; [ "$DRY" = 1 ] || "$@"; }
+warn() { echo "warning: $*" >&2; }
 
-for t in "${TARGETS[@]}"; do
-  [ -d "$t" ] || run mkdir -p "$t"
+skill_entries() {
+  find "$REPO/skills" -mindepth 2 -type f -name SKILL.md |
+    awk -F/ '{ print NF "\t" $0 }' | LC_ALL=C sort -k1,1n -k2 | cut -f2- |
+    while read -r f; do
+      d="$(dirname "$f")"
+      printf '%s\t%s\n' "$(basename "$d")" "$d"
+    done
+}
 
-  # Remove dangling links into this repo.
-  for l in "$t"/*; do
-    [ -L "$l" ] || continue
-    dest="$(readlink "$l")"
-    case "$dest" in "$SRC"/*) [ -e "$l" ] || run rm "$l" ;; esac
+command_entries() {
+  [ -d "$REPO/capabilities" ] || return 0
+  find "$REPO/capabilities" -mindepth 2 -maxdepth 2 -type f -perm -u+x | LC_ALL=C sort | while read -r f; do
+    name="$(basename "$f")"
+    name="${name%.*}"
+    printf '%s\t%s\n' "${name//_/-}" "$f"
+  done
+}
+
+link_entries() {
+  dir="$1"; root="$2"; entries=""; names="|"
+  while IFS="$TAB" read -r name src; do
+    [ -n "$name" ] || continue
+    case "$names" in
+      *"|$name|"*) warn "$src: $name is already taken by a shallower or earlier entry, skipping"; continue ;;
+    esac
+    names="$names$name|"
+    entries="$entries$name$TAB$src
+"
   done
 
-  for s in "$SRC"/*/; do
-    s="${s%/}"; name="$(basename "$s")"; dst="$t/$name"
+  [ -d "$dir" ] || [ -n "$entries" ] || return 0
+  [ -d "$dir" ] || run mkdir -p "$dir"
+
+  for l in "$dir"/*; do
+    [ -L "$l" ] || continue
+    case "$(readlink "$l")" in "$root"/*) ;; *) continue ;; esac
+    case "$names" in *"|$(basename "$l")|"*) [ -e "$l" ] && continue ;; esac
+    run rm "$l"
+  done
+
+  while IFS="$TAB" read -r name src; do
+    [ -n "$name" ] || continue
+    dst="$dir/$name"
     if [ -L "$dst" ]; then
-      [ "$(readlink "$dst")" = "$s" ] && continue
-      case "$(readlink "$dst")" in
-        "$SRC"/*) run ln -sfn "$s" "$dst" ;;
-        *) echo "warning: $dst links elsewhere, skipping" >&2 ;;
+      cur="$(readlink "$dst")"
+      [ "$cur" = "$src" ] && continue
+      case "$cur" in
+        "$root"/*) run ln -sfn "$src" "$dst" ;;
+        *) warn "$dst links elsewhere, skipping" ;;
       esac
     elif [ -e "$dst" ]; then
-      echo "warning: $dst is a local skill, skipping" >&2
+      warn "$dst is not a link, skipping"
     else
-      run ln -s "$s" "$dst"
+      run ln -s "$src" "$dst"
     fi
-  done
+  done <<< "$entries"
+}
+
+for t in "${TARGETS[@]}"; do
+  skill_entries | link_entries "$t" "$REPO/skills"
 done
+
+commands="$(command_entries)"
+link_entries "$BIN" "$REPO/capabilities" <<< "$commands"
+case ":$PATH:" in
+  *":$BIN:"*) ;;
+  *) [ -z "$commands" ] || warn "$BIN is not on PATH, so capability commands won't run by name" ;;
+esac

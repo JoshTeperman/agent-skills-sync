@@ -2,7 +2,7 @@
 
 Reusable agent skills in the `SKILL.md` format, shared across agent tools.
 
-Each skill lives in `skills/<skill-name>/` with a `SKILL.md` (YAML frontmatter `name` + `description`, then instructions) and any supporting files.
+Each skill lives in `skills/<skill-name>/` with a `SKILL.md` (YAML frontmatter `name` + `description`, then instructions) and any supporting files, including scripts. A skill's `SKILL.md` runs its scripts by path from its own folder, so any sync must link or copy the whole folder, not just `SKILL.md`.
 
 ### Setup
 
@@ -29,6 +29,7 @@ SKILLS_TARGETS="~/.claude/skills ~/.agents/skills" bin/link # configure with env
 | skill | description |
 |---|---|
 | [`/new-project`](./skills/new-project/SKILL.md) | create a project in your project store (Notion by default) from the current conversation. |
+| [`youtube-transcript`](./skills/youtube-transcript/SKILL.md) | fetch a YouTube video's transcript from its captions with a stdlib-only Python script. |
 
 </details>
 

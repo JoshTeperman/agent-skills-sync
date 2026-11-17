@@ -1,26 +1,33 @@
 # agent-skills-sync
 
-Reusable agent skills in the `SKILL.md` format, shared across agent tools.
+Reusable agent skills in the `SKILL.md` format, shared across agent tools, and the command-line tools they use.
 
-Each skill lives in `skills/<skill-name>/` with a `SKILL.md` (YAML frontmatter `name` + `description`, then instructions) and any supporting files.
+- `skills/` holds skills. A skill is a folder with a `SKILL.md` (YAML frontmatter `name` + `description`, then instructions) and any supporting files. Skill folders can sit at any depth, such as `skills/principles/<skill-name>/`.
+- `capabilities/` holds tools, one folder per capability, such as `capabilities/<capability-name>/`. A capability is a plain CLI that prints JSON or text, so any agent, script, or person can call it. A skill tells agents when and how to call a capability, and doesn't copy its code.
 
 ### Setup
 
-Clone this repo and configure your hooks path so hooks in `/.githooks` are active.
-
-```bash
-git config core.hooksPath .githooks`
-```
-
-### Syncing Skills
-
-Skills in `/skills` are synced to all specified directories with symlinks. Run the `bin/link` script to generate the symlinks. Defaults to `~/.claude/skills`, but you can specify custom targets. Safe to re-run. Re-runs `bin/link` when a git pull changes `skills/`. Links to deleted skills are removed, and symlink is skipped when local skill with the same name already exists.
+Run these once in each clone:
 
 ```sh
-bin/link              # link into default targets
-bin/link --dry-run    # show what would change
-bin/link ~/.claude/skills ~/.agents/skills      # custom targets
-SKILLS_TARGETS="~/.claude/skills ~/.agents/skills" bin/link # configure with env var
+git config core.hooksPath .githooks
+bin/link
+```
+
+### Syncing skills and capabilities
+
+`bin/link` creates symlinks and is safe to re-run. The git hooks run it again when a pull changes `skills/`, `capabilities/`, or `bin/`.
+
+- Every folder under `skills/` that has a `SKILL.md` is linked into each target as `<target>/<folder-name>`, because agent tools find skills one level deep only. The default target is `~/.claude/skills`.
+- Every executable file directly inside `capabilities/<capability-name>/` is linked as a command into `$CAPABILITIES_BIN`, default `~/.local/bin`. The command name is the file name without its extension, with `_` replaced by `-`, so `yt_transcript.py` becomes `yt-transcript`. `bin/link` warns if that folder isn't on `PATH`.
+- Links to deleted skills and capabilities are removed. A real file or folder, or a link that points outside this repo, is left alone with a warning. If two skills or two commands have the same name, the shallower path wins, then the first path in alphabetical order. `bin/link` warns about the one it skips.
+
+```sh
+bin/link                                                  # link into the default targets
+bin/link --dry-run                                        # show what would change
+bin/link ~/.claude/skills ~/.agents/skills                # custom skill targets
+SKILLS_TARGETS="$HOME/.claude/skills $HOME/.agents/skills" bin/link
+CAPABILITIES_BIN="$HOME/bin" bin/link                     # custom command folder
 ```
 
 <details>
@@ -32,4 +39,3 @@ SKILLS_TARGETS="~/.claude/skills ~/.agents/skills" bin/link # configure with env
 | [`youtube-transcript`](./skills/youtube-transcript/SKILL.md) | fetch a YouTube video's transcript from its captions with the `yt-transcript` command. |
 
 </details>
-

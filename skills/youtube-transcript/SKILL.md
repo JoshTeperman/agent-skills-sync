@@ -6,19 +6,19 @@ disable-model-invocation: false
 
 # YouTube transcript
 
-`yt_transcript.py` sits in the same folder as this `SKILL.md`. It needs only `python3` (3.8+), with no packages.
+The `yt-transcript` command prints a video's captions. It needs only `python3` (3.8+), with no packages.
 
 ## Run
 
-Run it by path from this skill's folder, the folder you loaded this file from:
-
 ```sh
-python3 <skill-dir>/yt_transcript.py <url-or-id> [--lang en] [--timestamps | --json]
+yt-transcript <url-or-id> [--lang en] [--timestamps | --json]
 ```
 
-- `<skill-dir>` is wherever this skill is installed: a tool's skills folder such as `~/.claude/skills/youtube-transcript`, or `skills/youtube-transcript` in a clone of the skills repo.
-- If you don't know the folder: `find ~ -path '*/youtube-transcript/yt_transcript.py' 2>/dev/null | head -1`
-- Use `python3 <path>`, not `./yt_transcript.py`, because some syncs drop the executable bit.
+If `yt-transcript` is not found:
+
+1. Find the script in the skills repo clone: `find ~ /workspace -maxdepth 6 -path '*/capabilities/youtube-transcript/yt_transcript.py' 2>/dev/null`. The clone is the folder that holds `capabilities/`.
+2. Run `bin/link` in the clone to link `yt-transcript` into `~/.local/bin`. If `bin/link` warns that the folder is not on `PATH`, add it.
+3. Or run the script directly: `python3 <clone>/capabilities/youtube-transcript/yt_transcript.py <url-or-id> ...`
 
 ## Options and output
 
@@ -43,7 +43,7 @@ Errors go to stderr as `error: ...`.
 
 ## Fallbacks
 
-The script uses YouTube's undocumented player and timed-text endpoints, which can change. If it fails with exit 1 or 4, try these in order:
+The command uses YouTube's undocumented player and timed-text endpoints, which can change. If it fails with exit 1 or 4, try these in order:
 
 ```sh
 python3 -m pip install youtube-transcript-api   # use a venv if pip refuses

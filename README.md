@@ -36,5 +36,6 @@ CAPABILITIES_BIN="$HOME/bin" bin/link                     # custom command folde
 | skill | description |
 |---|---|
 | [`/new-project`](./skills/new-project/SKILL.md) | create a project in your project store (Notion by default) from the current conversation. |
+| [`youtube-transcript`](./skills/youtube-transcript/SKILL.md) | fetch a YouTube video's transcript from its captions with the `yt-transcript` command. |
 
 </details>

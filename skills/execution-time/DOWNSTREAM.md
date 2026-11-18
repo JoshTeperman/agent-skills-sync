@@ -60,3 +60,7 @@ This skill is a fork of `poteto-mode` by Lauren Tan (@poteto). This file records
 - RENAME `../playbooks/investigate.md` to `playbooks/investigate.md`, so the skill's relative playbook path resolves.
 - PATCH `SKILL.md`. The colon rule cites `unslop-prose` rule 10 instead of `unslop` rule 14.
 - PATCH `playbooks/investigate.md`. Name the `unslop-prose` skill instead of `unslop`.
+
+### 2026-11-18
+
+- ADD **Scope Checks to the Change** under Verification in the principles list.

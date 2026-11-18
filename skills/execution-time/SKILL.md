@@ -44,6 +44,7 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 **Verification**
 
 - **Prove It Works.** After a task, before declaring done. Verify against the real artifact, not a proxy or "it compiles".
+- **Scope Checks to the Change.** Before a commit, a push, or a verify-before-done step. Run only the checks that cover the change. Do not rerun a passing check or default to the full suite. CI owns exhaustive coverage and the platform matrix.
 - **Fix Root Causes.** Debugging. Trace each symptom to its root cause, reproduce first, ask why until you reach it.
 - **Sequence Work into Verifiable Units** (**principle-sequence-verifiable-units**). Multi-step work (sweeps, migrations, runs of similar edits) and how you stack commits and PRs. Break work into small units that each end in a check, verify each before the next, and order delivery so the sequence proves itself.
 - **Test Behavior, Not Implementation.** Writing, changing, or keeping a test. Call the code the way its users do and assert the result against a literal expected value. If the test would still pass when every imported function returns `undefined`, rewrite the assertion or delete the test.

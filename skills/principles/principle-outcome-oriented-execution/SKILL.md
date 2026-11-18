@@ -18,4 +18,4 @@ Optimize for the intended, verifiable end state rather than preserving smooth in
 - Use this for planned rewrites and migrations with explicit phase boundaries
 - Declare where temporary breakage is acceptable
 - Keep high-signal checks for actively touched areas while migrating
-- Require full static and runtime verification at plan completion
+- At plan completion, verify the end state for real. Scope those checks with the **scope-checks-to-the-change** principle skill.

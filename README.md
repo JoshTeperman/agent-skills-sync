@@ -36,6 +36,7 @@ CAPABILITIES_BIN="$HOME/bin" bin/link                     # custom command folde
 | skill | description |
 |---|---|
 | [`/new-project`](./skills/new-project/SKILL.md) | create a project in your project store (Notion by default) from the current conversation. |
+| [`knowledge-vault`](./skills/knowledge-vault/SKILL.md) | search and read the user's knowledge vault over its tailnet-only MCP server (native MCP or `curl`). |
 | [`youtube-transcript`](./skills/youtube-transcript/SKILL.md) | fetch a YouTube video's transcript from its captions with the `yt-transcript` command. |
 
 </details>

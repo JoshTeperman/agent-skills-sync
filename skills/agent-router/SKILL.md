@@ -21,8 +21,6 @@ Load these from the process environment, or from `.env` in this skill folder if 
 - `AGENT_ROUTER_INBOX`: the address captures arrive at.
 - `AGENT_ROUTER_USER_IDENTITIES`: the user's verified sender addresses, comma-separated.
 
-Copy `.env.example` to `.env` and fill in the real values. Don't commit `.env`.
-
 If either env value is missing or empty, stop and tell the user. Never treat any sender as verified without identities.
 
 ## Item store

@@ -19,7 +19,8 @@ Check the diff against main and remove AI-generated slop introduced in the branc
 - Defensive checks or try/catch blocks that are abnormal for trusted code paths
 - Casts to `any` used only to bypass type issues
 - Deeply nested code that should be simplified with early returns
-- Other patterns inconsistent with the file and surrounding codebase
+- Code that implies a use only a later change provides, e.g., and instance variable nothing reads, a hook nothing calls. Allow stubs or placeholder methods if current changes require them.
+- Other patterns inconsistent with the file and surrounding codebase.
 
 ## Guardrails
 

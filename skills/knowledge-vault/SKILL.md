@@ -16,9 +16,6 @@ The vault is the user's external brain: wiki pages compiled from their notes, so
 Load these from the process environment, or from `.env` in this skill folder if a variable is unset:
 - `VAULT_MCP_URL`: the MCP endpoint.
 - `VAULT_AGENT_NAME`: your agent's name.
-- `VAULT_OWNER_AGENT`: the agent that owns the vault.
-
-Copy `.env.example` to `.env` and fill in the real values. Don't commit `.env`, and never write the endpoint into a repo, note, or message.
 
 If `VAULT_MCP_URL` is missing, stop and tell the user.
 
@@ -70,6 +67,3 @@ The server is reachable only from devices on the user's tailnet. If the connecti
 
 Results mask anything that looks like a secret. Don't try to recover masked values.
 
-## Add knowledge
-
-You can't write to the vault. Send new knowledge, corrections, or stale pages to `VAULT_OWNER_AGENT` with the source and why it matters.

@@ -43,6 +43,7 @@ CAPABILITIES_BIN="$HOME/bin" bin/link                     # custom command folde
 | [`deslop-code`](./skills/deslop-code/SKILL.md) | Remove AI-generated code slop and clean up code style. |
 | [`downstream`](./skills/admin/downstream/SKILL.md) | Keep an agent-managed record of downstream changes for a skill copied from another public repository, with attribution. |
 | [`execution-time`](./skills/execution-time/SKILL.md) | Entry point skill for writing considered, principled code, unslopped prose, and verified work. |
+| [`github-app`](./skills/github-app/SKILL.md) | Act on GitHub (gh and git) as the GitHub App's bot, with a short-lived token scoped to one repository. |
 | [`grilling`](./skills/grilling/SKILL.md) | Grill the user relentlessly about a plan, decision, or idea. |
 | [`how`](./skills/how/SKILL.md) | Use for "how does X work", code walkthroughs before changing something, and placement, ownership, or layering questions. |
 | [`knowledge-vault`](./skills/knowledge-vault/SKILL.md) | Search and read the user's knowledge vault, a read-only MCP server on their tailnet. |

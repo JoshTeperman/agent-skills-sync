@@ -150,7 +150,6 @@ def run(cmd, env):
 
 
 def credential(args):
-    """git credential helper: answer only for github.com and the one repository."""
     request = {}
     for line in sys.stdin:
         line = line.rstrip("\n")
@@ -159,7 +158,7 @@ def credential(args):
         key, _, value = line.partition("=")
         request[key] = value
     if not args or args[0] != "get":
-        return 0  # ignore store and erase
+        return 0
 
     repository = os.environ.get("GITHUB_APP_REPOSITORY", "")
     path = request.get("path", "").strip("/")
@@ -236,7 +235,7 @@ def write_cache(path, grant):
     keep = {k: grant[k] for k in ("token", "expires_at", "bot_name", "bot_email", "permissions", "repositories") if k in grant}
     fd, tmp = tempfile.mkstemp(dir=CACHE_DIR, prefix=".tmp-")
     try:
-        with os.fdopen(fd, "w") as f:  # mkstemp creates the file with mode 600
+        with os.fdopen(fd, "w") as f:
             json.dump(keep, f)
         os.replace(tmp, path)
     except OSError:
